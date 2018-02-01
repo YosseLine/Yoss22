@@ -1,36 +1,51 @@
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Ejemplo</title>
-    <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
-  <form>
-  <div class="form-group">
-    <label for="cn">Número de tarjeta</label>
-    <input id="cn" name="cn" />
-  </div>
-  <div class="form-group">
-    <label for="exp">Fecha de vencimiento</label>
-    <input id="exp" name="exp" />
-  </div>
-  <div class="form-group">
-    <label for="cvv">CVV</label>
-    <input id="cvv" name="cvv" />
-  </div>
-  <div class="form-group">
-    <label for="name">Nombre completo</label>
-    <input id="name" name="name" />
-   </div>
-   <button id="btn-validate" type="button" name="button">Validar</button>
-  </form>
-  
-  <!-- Vínculo de archivos js-->
-  <script type="text/javascript" src="index.js"></script>
- </body>
-</html>
+```js
+window.addEventListener('load', () =>{
+  const form = document.querySelector('form');
+  let btnValidate = document.getElementById('btn-validate');
+
+  // Creamos la función validate
+  function validate(event) {
+    // Llamamos a todos los input existentes
+    let inputsForm = document.querySelectorAll('input');
+    // Recorremos la lista de nodos
+    for (let i in inputsForm) {
+      console.log(inputsForm[i].name);
+      // Codicionamos para capturar el input que tenga el id name
+      if (inputsForm[i].name === 'name') {
+        // Recorremos la data json
+        for (let j in json) {
+          // Comparamos si el value del input con id name es igual a la propiedad 'name'
+          if (inputsForm[i].value === json[j]['name']) {
+            break;
+          } else {
+            // Aquí se agregaría la modficación para que el input tenga un border rojo, como símbolo de error
+            inputsForm[i].value = '';
+            break;
+          }
+        };
+      } else if (inputsForm[i].name === 'exp') {
+        for (let j in json) {
+          if (inputsForm[i].value === json[j]['expir_date']) {
+            console.log('Fecha idéntica');
+            break;
+          } else {
+            // Aquí se agregaría la modficación para que el input tenga un border rojo, como símbolo de error
+            class wrong {
+              constructor(color) {
+                this.color = red;
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+    form.addEventListener('submit', validate, false);
+  }
+
+  btnValidate.addEventListener('click', () =>{
+    validate(form);
+  });
+});
+
 ```
